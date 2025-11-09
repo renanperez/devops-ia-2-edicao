@@ -68,7 +68,7 @@ jobs:
             - name: Deploy to Kubernetes Cluster
               uses: azure/k8s-deploy@v5
               with:
-                namespace: default
+                namespace: tech-homolog
                 manifests: |
                   02-encontros-tech/k8s/manifests.yaml
                 images: |
@@ -78,7 +78,7 @@ jobs:
     CD-producao:
         runs-on: ubuntu-latest
         environment: producao
-        needs: [CI]
+        needs: [CD-homolog]
         steps:
             - name: Checkout
               uses: actions/checkout@v5
@@ -102,7 +102,7 @@ jobs:
             - name: Deploy to Kubernetes Cluster
               uses: azure/k8s-deploy@v5
               with:
-                namespace: default
+                namespace: tech-producao
                 manifests: |
                   02-encontros-tech/k8s/manifests.yaml
                 images: |
